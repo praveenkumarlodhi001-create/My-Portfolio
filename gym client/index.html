@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legends Fitness Centre | Govindpuram, Ghaziabad</title>
+<meta name="description" content="Legends Fitness Centre — premium strength training, personal coaching and competition prep in Govindpuram, Ghaziabad. Open Mon–Sat, 5:30 AM–10:00 PM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Additional styles for WhatsApp float and BMI Calculator */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    z-index: 999;
+    transition: transform 0.3s ease;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+  }
+  .bmi-section {
+    padding: 80px 0;
+    background: #121212;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .bmi-calculator {
+    max-width: 600px;
+    margin: 40px auto 0;
+    background: #181818;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .bmi-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  @media(max-width: 600px) {
+    .bmi-inputs { grid-template-columns: 1fr; }
+  }
+  .form-input {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .form-input:focus {
+    border-color: #f39c12;
+    outline: none;
+  }
+  .bmi-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #0a0a0a;
+    border-left: 4px solid #f39c12;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="nav">
+    <a href="#home" class="logo">
+      <span class="l1">LEGENDS</span>
+      <span class="l2">FITNESS CENTRE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#facilities">Facilities</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#bmi">BMI Calc</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:+918700434450" class="btn btn-ghost">08700 434450</a>
+      <a href="#contact" class="btn btn-gold"><span>Join Now</span></a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#bmi">BMI Calc</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-gold"><span>Book a Free Session</span></a>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-stripe"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Govindpuram &middot; Ghaziabad</span>
+    <h1>Forge Your <span class="gold-text">Legacy</span> at Legends Fitness Centre</h1>
+    <p class="sub">Elite strength training, honest coaching, and a community that shows up every day &mdash; built for lifters, athletes, and everyone chasing their next personal best.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold"><span>Get Started</span></a>
+      <a href="tel:+918700434450" class="btn btn-outline">Call Now</a>
+    </div>
+    <div class="hero-info">
+      <div>
+        <div class="k">Hours</div>
+        <div class="v">Mon&ndash;Sat, 5:30 AM &ndash; 10:00 PM</div>
+      </div>
+      <div>
+        <div class="k">Sunday</div>
+        <div class="v">Closed</div>
+      </div>
+      <div>
+        <div class="k">Location</div>
+        <div class="v">Hapur Rd, Govindpuram</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span><span>Scroll</span></div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span><i>Strength</i> &bull; Endurance &bull; <i>Discipline</i> &bull; Community &bull; <i>Consistency</i> &bull; Legacy &bull; <i>Strength</i> &bull; Endurance &bull; <i>Discipline</i> &bull; Community &bull; <i>Consistency</i> &bull; Legacy &bull;</span>
+    <span aria-hidden="true"><i>Strength</i> &bull; Endurance &bull; <i>Discipline</i> &bull; Community &bull; <i>Consistency</i> &bull; Legacy &bull; <i>Strength</i> &bull; Endurance &bull; <i>Discipline</i> &bull; Community &bull; <i>Consistency</i> &bull; Legacy &bull;</span>
+  </div>
+</div>
+
+<section class="about reveal" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <span class="eyebrow">About Legends</span>
+      <h2 style="margin:14px 0 26px; font-size:clamp(1.8rem,3.4vw,2.6rem);">Strength Is Built Here, Rep By Rep</h2>
+      <p>Legends Fitness Centre was built on one idea: real transformation comes from consistency, not shortcuts. Our Govindpuram floor is set up for serious training &mdash; heavy iron, honest coaching, and a crew that pushes each other through every set.</p>
+      <p>Whether you're stepping into a gym for the first time or prepping for your next competition, you'll train alongside people who take it seriously. <strong>No egos, no gimmicks &mdash; just work.</strong></p>
+      <a href="#facilities" class="btn btn-outline" style="margin-top:12px;">Explore Facilities</a>
+    </div>
+    <div class="about-visual">
+      <div class="frame">
+        <img src="assets/img/physique-transformation.jpg" alt="Legends Fitness Centre member showing training results" loading="lazy">
+      </div>
+      <div class="tag">
+        <div class="n">Real Results</div>
+        <div class="d">Trained At Legends</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="barbell-divider">
+  <div class="plate small"></div>
+  <div class="plate"></div>
+  <div class="bar"></div>
+  <div class="plate"></div>
+  <div class="plate small"></div>
+</div>
+
+<section class="facilities reveal reveal-stagger" id="facilities" style="margin-top:80px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Facilities &amp; Equipment</span>
+      <h2>Everything You Need To Train Hard</h2>
+      <p>A gym floor built for real progress &mdash; from your first workout to competition prep.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="fac-grid">
+      <div class="fac-card">
+        <svg class="fac-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="8" width="12" height="32" rx="2"/><rect x="6" y="16" width="8" height="16" rx="1"/><rect x="34" y="16" width="8" height="16" rx="1"/></svg>
+        <h3>Strength Training Floor</h3>
+        <p>Full racks, free weights, and progressive-overload stations for serious lifting.</p>
+      </div>
+      <div class="fac-card">
+        <svg class="fac-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 30l8-14 6 10 6-16 6 20 10-10"/></svg>
+        <h3>Cardio &amp; Conditioning</h3>
+        <p>Treadmills, cycles, and conditioning drills to build endurance and burn fat.</p>
+      </div>
+      <div class="fac-card">
+        <svg class="fac-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="14" r="6"/><path d="M12 40c0-8 5-14 12-14s12 6 12 14"/></svg>
+        <h3>Personal Training</h3>
+        <p>One-on-one coaching with programming, form correction, and real accountability.</p>
+      </div>
+      <div class="fac-card has-img">
+        <div class="fac-bg" style="background-image:url('assets/img/competition-stage.jpg');"></div>
+        <div class="fac-content">
+          <h3>Competition Prep</h3>
+          <p>Posing practice and physique coaching for members stepping on stage.</p>
+        </div>
+      </div>
+      <div class="fac-card">
+        <svg class="fac-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="16" cy="24" r="6"/><circle cx="32" cy="24" r="6"/><circle cx="24" cy="14" r="6"/></svg>
+        <h3>Community Sessions</h3>
+        <p>Group training energy that keeps you consistent when motivation dips.</p>
+      </div>
+      <div class="fac-card">
+        <svg class="fac-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 8c-8 6-14 10-14 20a14 14 0 0028 0c0-10-6-14-14-20z"/></svg>
+        <h3>Recovery &amp; Mobility</h3>
+        <p>A dedicated corner to stretch, roll out, and recover between sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW: Interactive BMI Calculator Section -->
+<section class="bmi-section reveal" id="bmi">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Calculate Your Stats</span>
+      <h2>Check Your BMI</h2>
+      <p>Measure your body mass index to track your fitness metrics.</p>
+    </div>
+    <div class="bmi-calculator">
+      <div class="bmi-inputs">
+        <input type="number" id="bmiHeight" placeholder="Height (cm)" class="form-input">
+        <input type="number" id="bmiWeight" placeholder="Weight (kg)" class="form-input">
+      </div>
+      <button type="button" id="calcBmiBtn" class="btn btn-gold" style="width: 100%; text-align: center; justify-content: center;"><span>Calculate BMI</span></button>
+      <div id="bmiResult" class="bmi-result" style="display:none;">
+        Your BMI is: <strong id="bmiValue">0</strong> (<span id="bmiCategory">--</span>)
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery reveal reveal-stagger" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Inside Legends</span>
+      <h2>Life On The Gym Floor</h2>
+      <p>A look at the crew, the training, and the moments that make Legends what it is.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-caption="The Legends crew, always training together">
+        <img src="assets/img/gym-lineup.jpg" alt="Group of Legends Fitness Centre members in the gym" loading="lazy">
+        <span class="plus">&#43;</span>
+        <div class="cap"><div class="t">The Crew</div><div class="s">Training together, every day</div></div>
+      </div>
+      <div class="gallery-item" data-caption="Arm day at Legends Fitness Centre">
+        <img src="assets/img/arm-day-crew.jpg" alt="Members flexing after an arm workout at Legends Fitness Centre" loading="lazy">
+        <span class="plus">&#43;</span>
+        <div class="cap"><div class="t">Arm Day</div><div class="s">Results you can see</div></div>
+      </div>
+      <div class="gallery-item" data-caption="Celebrating milestones together at Legends">
+        <img src="assets/img/gym-celebration.jpg" alt="Legends Fitness Centre members celebrating together" loading="lazy">
+        <span class="plus">&#43;</span>
+        <div class="cap"><div class="t">Community</div><div class="s">We celebrate every milestone</div></div>
+      </div>
+      <div class="gallery-item" data-caption="A Legends athlete on the competition stage">
+        <img src="assets/img/competition-stage.jpg" alt="Bodybuilding competitor trained at Legends Fitness Centre" loading="lazy">
+        <span class="plus">&#43;</span>
+        <div class="cap"><div class="t">On Stage</div><div class="s">Competition-ready physiques</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="schedule reveal" id="schedule">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Hours &amp; Location</span>
+      <h2>Train On Your Schedule</h2>
+    </div>
+    <div class="sched-grid">
+      <div class="sched-hours">
+        <h3>Weekly Hours</h3>
+        <div class="hours-row" data-day="1"><span class="day">Monday</span><span class="time">5:30 AM &ndash; 10:00 PM</span></div>
+        <div class="hours-row" data-day="2"><span class="day">Tuesday</span><span class="time">5:30 AM &ndash; 10:00 PM</span></div>
+        <div class="hours-row" data-day="3"><span class="day">Wednesday</span><span class="time">5:30 AM &ndash; 10:00 PM</span></div>
+        <div class="hours-row" data-day="4"><span class="day">Thursday</span><span class="time">5:30 AM &ndash; 10:00 PM</span></div>
+        <div class="hours-row" data-day="5"><span class="day">Friday</span><span class="time">5:30 AM &ndash; 10:00 PM</span></div>
+        <div class="hours-row" data-day="6"><span class="day">Saturday</span><span class="time">5:30 AM &ndash; 10:00 PM</span></div>
+        <div class="hours-row closed" data-day="0"><span class="day">Sunday</span><span class="time">Closed</span></div>
+      </div>
+      <div class="sched-location" id="contact">
+        <h3>Find Us</h3>
+        <address>
+          Legends Fitness Centre<br>
+          Hapur Rd, Daulat Pura, Block C,<br>
+          Mishal Garhi, Govindpuram,<br>
+          Ghaziabad, Uttar Pradesh 201013
+        </address>
+        <div class="phone">Call us at <a href="tel:+918700434450">+91 87004 34450</a></div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Legends+Fitness+Centre+Hapur+Rd+Govindpuram+Ghaziabad" target="_blank" rel="noopener" class="btn btn-gold" style="align-self:flex-start;"><span>Get Directions</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band reveal">
+  <div class="wrap">
+    <h2>Your First Session Is On Us</h2>
+    <p>Walk in, meet the coaches, and see the floor for yourself &mdash; no pressure, no obligation.</p>
+    <div class="hero-cta" style="justify-content:center;">
+      <a href="tel:+918700434450" class="btn btn-dark">Call Now</a>
+      <a href="#schedule" class="btn btn-outline">Plan Your Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEW: Floating WhatsApp Quick Chat Button -->
+<a href="https://wa.me/918700434450?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Legends%20Fitness%20Centre%20memberships." 
+   target="_blank" 
+   rel="noopener" 
+   aria-label="Chat on WhatsApp" 
+   class="whatsapp-float">
+   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#home" class="logo">
+          <span class="l1">LEGENDS</span>
+          <span class="l2">FITNESS CENTRE</span>
+        </a>
+        <p>A Govindpuram gym built on consistency, honest coaching, and heavy iron. Come train with people who show up.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 2 .3 2.4.5.6.2 1 .5 1.5 1 .4.4.7.8 1 1.5.2.5.4 1.3.5 2.4.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.3 2-.5 2.4-.3.6-.6 1-1 1.5-.4.4-.9.7-1.5 1-.5.2-1.3.4-2.4.5-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-2-.3-2.4-.5-.6-.3-1-.6-1.5-1-.4-.4-.7-.9-1-1.5-.2-.5-.4-1.3-.5-2.4-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.3-2 .5-2.4.2-.6.6-1 1-1.5.4-.4.8-.7 1.5-1 .5-.2 1.3-.4 2.4-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1 .1-1.6.2-1.9.4-.5.2-.8.4-1.2.7-.3.4-.5.7-.7 1.2-.1.3-.3.9-.4 1.9-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1 .2 1.6.4 1.9.2.5.4.8.7 1.2.4.4.7.6 1.2.7.3.2.9.3 1.9.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1-.1 1.6-.2 1.9-.4.5-.2.8-.4 1.2-.7.4-.4.6-.7.7-1.2.2-.3.3-.9.4-1.9.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1-.2-1.6-.4-1.9-.2-.5-.4-.8-.7-1.2-.4-.4-.7-.6-1.2-.7-.3-.2-.9-.3-1.9-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.5a5.3 5.3 0 110 10.7 5.3 5.3 0 010-10.7zm0 1.8a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.5-2a1.2 1.2 0 110 2.5 1.2 1.2 0 010-2.5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Quick Links</h4>
+        <a href="#about">About</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#bmi">BMI Calc</a>
+        <a href="#schedule">Schedule</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+918700434450">+91 87004 34450</a>
+        <p>Hapur Rd, Govindpuram,<br>Ghaziabad, UP 201013</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Legends Fitness Centre. All rights reserved.</span>
+      <span>Govindpuram, Ghaziabad</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">&uarr;</button>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+  /* Header background on scroll */
+  const header = document.getElementById('siteHeader');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    toTop.classList.toggle('show', y > 600);
+  });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* Mobile nav */
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => { mobileMenu.classList.remove('open'); burger.classList.remove('open'); });
+  });
+
+  /* Hero parallax */
+  const heroBg = document.getElementById('heroBg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = `scale(1.08) translateY(${y * 0.18}px)`;
+      }
+    }, { passive: true });
+  }
+
+  /* Scroll reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  /* Highlight today in the schedule (local time) */
+  const today = new Date().getDay(); // 0 = Sunday
+  const todayRow = document.querySelector(`.hours-row[data-day="${today}"]`);
+  if (todayRow) todayRow.classList.add('today');
+
+  /* Gallery lightbox */
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = item.dataset.caption || '';
+      lightbox.classList.add('open');
+    });
+  });
+  const closeLb = () => lightbox.classList.remove('open');
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+
+  /* BMI Calculator Logic */
+  document.getElementById('calcBmiBtn').addEventListener('click', () => {
+    const h = parseFloat(document.getElementById('bmiHeight').value);
+    const w = parseFloat(document.getElementById('bmiWeight').value);
+    const resBox = document.getElementById('bmiResult');
+    const valSpan = document.getElementById('bmiValue');
+    const catSpan = document.getElementById('bmiCategory');
+
+    if (!h || !w || h <= 0 || w <= 0) {
+      alert('Please enter valid height and weight values.');
+      return;
+    }
+
+    const heightM = h / 100;
+    const bmi = (w / (heightM * heightM)).toFixed(1);
+    let category = '';
+
+    if (bmi < 18.5) {
+      category = 'Underweight';
+    } else if (bmi >= 18.5 && bmi < 25) {
+      category = 'Normal weight';
+    } else if (bmi >= 25 && bmi < 30) {
+      category = 'Overweight';
+    } else {
+      category = 'Obese';
+    }
+
+    valSpan.textContent = bmi;
+    catSpan.textContent = category;
+    resBox.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
