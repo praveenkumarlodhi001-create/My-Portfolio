@@ -6,7 +6,7 @@ const niches = [
     name: '💪 Fitness & Gym',
     tagline: 'High-energy layout with membership plans, trainer profiles, and class schedules.',
     status: 'Ready & Live',
-    demoUrl: 'https://praveenkumarlodhi001-create.github.io/super-journey/', // <-- Yahan link update kar diya
+    demoUrl: 'https://praveenkumarlodhi001-create.github.io/super-journey/',
   },
   {
     id: 'restaurant',
@@ -60,14 +60,14 @@ export default function NicheDemos() {
               <button
                 key={niche.id}
                 onClick={() => setSelectedNiche(niche)}
-                className={`text-left px-5 py-4 rounded-xl border transition-all flex items-center justify-between font-display text-base ${
+                className={`text-left px-5 py-4 rounded-xl border transition-all duration-300 flex items-center justify-between font-display text-base cursor-pointer ${
                   selectedNiche.id === niche.id
-                    ? 'bg-ink text-paper border-ink shadow-md'
-                    : 'bg-paper-dim text-ink border-line hover:border-ink-soft'
+                    ? 'bg-ink text-paper border-ink shadow-lg scale-[1.02]'
+                    : 'bg-paper-dim text-ink border-line hover:border-accent/40'
                 }`}
               >
                 <span className="font-medium">{niche.name}</span>
-                <span className={`font-mono text-xs px-2.5 py-1 rounded ${
+                <span className={`font-mono text-xs px-2.5 py-1 rounded transition-colors ${
                   selectedNiche.id === niche.id ? 'bg-paper/20 text-paper' : 'bg-line text-ink-soft'
                 }`}>
                   {niche.id === 'gym' ? 'Live Now' : 'Preset'}
@@ -76,10 +76,14 @@ export default function NicheDemos() {
             ))}
           </div>
 
-          <div className="bg-paper-dim p-8 border border-line rounded-2xl flex flex-col justify-between h-full min-h-[320px]">
+          {/* Key prop change karne se har selection par smooth appearance/glow animation trigger hogi */}
+          <div 
+            key={selectedNiche.id}
+            className="bg-paper-dim p-8 border-2 border-accent/60 rounded-2xl flex flex-col justify-between h-full min-h-[320px] shadow-xl shadow-accent/15 animate-[fadeIn_0.4s_ease-in-out]"
+          >
             <div>
               <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs px-3 py-1 bg-signal/10 text-signal rounded-full">
+                <span className="font-mono text-xs px-3 py-1 bg-signal/10 text-signal rounded-full animate-pulse">
                   {selectedNiche.status}
                 </span>
                 <span className="font-mono text-xs text-ink-faint">Category: {selectedNiche.name}</span>
@@ -101,7 +105,7 @@ export default function NicheDemos() {
               href={selectedNiche.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 bg-accent text-white font-mono text-sm hover:bg-accent/90 transition-colors rounded-xl text-center block shadow-lg shadow-accent/20"
+              className="w-full py-3.5 bg-accent text-white font-mono text-sm hover:bg-accent/90 transition-all rounded-xl text-center block shadow-lg shadow-accent/25 hover:scale-[1.01]"
             >
               Launch {selectedNiche.name.split(' ')[1]} Live Demo &rarr;
             </a>

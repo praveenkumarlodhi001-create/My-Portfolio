@@ -10,17 +10,15 @@ const links = [
   { href: '#contact', label: 'Contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenModal }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    // Scroll detection for navbar background blur
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', onScroll);
 
-    // Observer to track which section is currently in view
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -67,7 +65,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Links with Active Highlight */}
-        <ul className="hidden md:flex items-center gap-8 font-mono text-sm">
+        <ul className="hidden md:flex items-center gap-6 font-mono text-sm">
           {links.map((link) => {
             const isActive = activeSection === link.href;
             return (
@@ -86,6 +84,18 @@ export default function Navbar() {
               </li>
             );
           })}
+          
+          {/* Glowing Client Login Button */}
+          <li>
+            <button 
+              onClick={onOpenModal}
+              className="px-4 py-2 bg-accent text-white hover:bg-accent/90 transition-all rounded-lg text-xs font-mono shadow-lg shadow-accent/25 relative flex items-center gap-2 animate-pulse cursor-pointer"
+            >
+              <span className="w-2 h-2 rounded-full bg-white animate-ping"></span>
+              Client Login & Budget
+            </button>
+          </li>
+
           <li>
             <a href="#contact" className="px-3.5 py-2 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors rounded-lg text-xs font-mono">
               Say hello
@@ -93,7 +103,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <button className="md:hidden flex flex-col gap-1.5 w-6" aria-label="Toggle menu" onClick={() => setOpen((o) => !o)}>
+        <button className="md:hidden flex flex-col gap-1.5 w-6 cursor-pointer" aria-label="Toggle menu" onClick={() => setOpen((o) => !o)}>
           <span className={`h-0.5 bg-ink transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`} />
           <span className={`h-0.5 bg-ink transition-opacity ${open ? 'opacity-0' : ''}`} />
           <span className={`h-0.5 bg-ink transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`} />
@@ -119,6 +129,14 @@ export default function Navbar() {
               </li>
             );
           })}
+          <li className="pt-2 border-t border-line">
+            <button 
+              onClick={() => { setOpen(false); onOpenModal && onOpenModal(); }}
+              className="w-full py-2.5 bg-accent text-white rounded-lg text-center font-mono text-xs shadow-md"
+            >
+              Client Login & Discuss Budget
+            </button>
+          </li>
         </ul>
       )}
     </header>
