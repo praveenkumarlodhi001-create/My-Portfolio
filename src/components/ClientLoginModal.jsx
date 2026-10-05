@@ -13,7 +13,7 @@ export default function ClientLoginModal({ isOpen, onClose }) {
     if (!name || !phone) return;
 
     const message = `Hello Praveen, my name is ${name}. I booked a 15-min strategy session for ${serviceType}. My WhatsApp number is ${phone}.`;
-    const whatsappUrl = `https://wa.me/919999999999?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/917830469154?text=${encodeURIComponent(message)}`;
     
     setSubmitted(true);
     setTimeout(() => {
@@ -25,7 +25,7 @@ export default function ClientLoginModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fadeIn">
-      <div className="bg-paper-dim border border-line p-8 rounded-3xl max-w-md w-full relative shadow-2xl">
+      <div className="modal-pop bg-paper-dim border border-line p-8 rounded-3xl max-w-md w-full relative shadow-2xl">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 text-ink-faint hover:text-ink font-mono text-sm cursor-pointer"
@@ -54,7 +54,7 @@ export default function ClientLoginModal({ isOpen, onClose }) {
                   placeholder="e.g. Aman Gupta"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-paper border border-line rounded-xl px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
+                  className="input-glow w-full bg-paper border border-line rounded-xl px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
                 />
               </div>
 
@@ -66,7 +66,7 @@ export default function ClientLoginModal({ isOpen, onClose }) {
                   placeholder="e.g. +91 98765 43210"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-paper border border-line rounded-xl px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
+                  className="input-glow w-full bg-paper border border-line rounded-xl px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
                 />
               </div>
 
@@ -75,7 +75,7 @@ export default function ClientLoginModal({ isOpen, onClose }) {
                 <select
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
-                  className="w-full bg-paper border border-line rounded-xl px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
+                  className="input-glow w-full bg-paper border border-line rounded-xl px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
                 >
                   <option value="Mobile App Development">Mobile App Development</option>
                   <option value="Business Website Solution">Business Website Solution</option>
@@ -85,7 +85,7 @@ export default function ClientLoginModal({ isOpen, onClose }) {
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-accent text-white font-mono text-xs rounded-xl hover:bg-accent/90 transition-all shadow-lg shadow-accent/25 mt-2 cursor-pointer"
+                className="w-full py-3.5 bg-accent text-white font-mono text-xs rounded-xl hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-accent/25 mt-2 cursor-pointer"
               >
                 Confirm & Connect on WhatsApp &rarr;
               </button>
@@ -93,9 +93,9 @@ export default function ClientLoginModal({ isOpen, onClose }) {
           </>
         ) : (
           <div className="text-center py-8">
-            <div className="w-12 h-12 bg-signal/10 text-signal rounded-full flex items-center justify-center mx-auto mb-4 font-bold">✓</div>
-            <h4 className="font-display font-semibold text-xl text-ink">Slot Reserved!</h4>
-            <p className="text-ink-soft text-xs mt-2">Opening secure WhatsApp channel...</p>
+            <div className="check-pop w-12 h-12 bg-signal/10 text-signal rounded-full flex items-center justify-center mx-auto mb-4 font-bold">✓</div>
+            <h4 className="font-display font-semibold text-xl text-ink animate-fadeIn">Slot Reserved!</h4>
+            <p className="text-ink-soft text-xs mt-2 animate-fadeIn">Opening secure WhatsApp channel...</p>
           </div>
         )}
       </div>

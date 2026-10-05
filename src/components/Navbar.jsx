@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
 const links = [
-  { href: '#services', label: 'Services' },
-  { href: '#demos', label: 'Demos' },
-  { href: '#pricing', label: 'Pricing' },
-  { href: '#process', label: 'Process' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#work', label: 'Work' },
+  { href: '#about', label: 'About' },
+  { href: '#projects', label: 'Work' },
+  { href: '#stack', label: 'Skills' },
   { href: '#contact', label: 'Contact' },
+  { href: '#services', label: 'Services' },
+  { href: '#pricing', label: 'Pricing' },
 ];
 
 export default function Navbar({ onOpenModal }) {
@@ -51,7 +50,7 @@ export default function Navbar({ onOpenModal }) {
         
         {/* Professional Tech Brand Logo */}
         <a href="#top" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center text-white shadow-lg shadow-accent/20 group-hover:scale-105 transition-transform">
+          <div className="logo-orbit w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center text-white shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform duration-300">
             <span className="font-display font-bold text-sm tracking-tighter">PK</span>
           </div>
           <div className="flex flex-col">
@@ -89,9 +88,8 @@ export default function Navbar({ onOpenModal }) {
           <li>
             <button 
               onClick={onOpenModal}
-              className="px-4 py-2 bg-accent text-white hover:bg-accent/90 transition-all rounded-lg text-xs font-mono shadow-lg shadow-accent/25 relative flex items-center gap-2 animate-pulse cursor-pointer"
+              className="px-4 py-2 bg-accent text-white hover:bg-accent/90 transition-colors rounded-lg text-xs font-mono shadow-lg shadow-accent/25 cursor-pointer"
             >
-              <span className="w-2 h-2 rounded-full bg-white animate-ping"></span>
               Client Login & Budget
             </button>
           </li>
@@ -131,7 +129,7 @@ export default function Navbar({ onOpenModal }) {
           })}
           <li className="pt-2 border-t border-line">
             <button 
-              onClick={() => { setOpen(false); onOpenModal && onOpenModal(); }}
+              onClick={() => { setOpen(false); onOpenModal?.(); }}
               className="w-full py-2.5 bg-accent text-white rounded-lg text-center font-mono text-xs shadow-md"
             >
               Client Login & Discuss Budget

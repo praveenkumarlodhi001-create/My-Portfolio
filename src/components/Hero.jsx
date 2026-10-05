@@ -18,37 +18,43 @@ export default function Hero({ onOpenModal }) {
 
   return (
     <section id="top" className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 overflow-hidden">
-      <div className="max-w-content mx-auto px-6 sm:px-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+      {/* Ambient animated background blobs */}
+      <div className="bg-blob bg-blob-1 w-[420px] h-[420px] bg-accent/20 -top-32 -left-32"></div>
+      <div className="bg-blob bg-blob-2 w-[380px] h-[380px] bg-signal/10 top-1/3 -right-24"></div>
+
+      <div className="max-w-content mx-auto px-6 sm:px-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center relative z-10">
         <div>
           {/* Quick Highlight Banner */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
+          <div className="animate-fadeIn-d1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
             <span className="w-2 h-2 rounded-full bg-signal animate-pulse"></span>
             <span className="font-mono text-xs text-accent">Open for Projects & Custom Budgets</span>
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-xs text-ink-soft mb-6 h-4">
+          <div className="animate-fadeIn-d1 flex items-center gap-2 font-mono text-xs text-ink-soft mb-6 h-4">
             <span className={isConnected ? 'status-dot' : 'inline-block w-2 h-2 rounded-full bg-ink-faint'} />
             <span>{sequence[stepIndex].text}</span>
           </div>
           
-          <h1 className="font-display font-semibold text-ink text-[2.75rem] leading-[1.08] sm:text-6xl sm:leading-[1.05] tracking-tight max-w-xl">
-            Backend systems and mobile apps that respond in real time.
+          <h1 className="animate-fadeIn-d2 font-display font-semibold text-ink text-[2.75rem] leading-[1.08] sm:text-6xl sm:leading-[1.05] tracking-tight max-w-xl">
+            Backend systems and mobile apps that <span className="gradient-text">respond in real time</span>.
           </h1>
           
-          <p className="mt-6 text-ink-soft text-lg leading-relaxed max-w-md">
+          <p className="animate-fadeIn-d3 mt-6 text-ink-soft text-lg leading-relaxed max-w-md">
             I'm Praveen Kumar, a full-stack developer building React Native apps, WebSocket-driven backends, and AI features — including Roastify, live on the Play Store.
           </p>
           
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="#demos" className="px-5 py-3 bg-ink text-paper font-mono text-sm hover:bg-accent transition-colors rounded-lg">View Industry Demos</a>
-            <button onClick={onOpenModal} className="px-5 py-3 border border-accent text-accent font-mono text-sm hover:bg-accent/10 transition-colors rounded-lg cursor-pointer">
+          <div className="animate-fadeIn-d4 mt-10 flex flex-wrap items-center gap-4">
+            <a href="#projects" className="shine-btn px-5 py-3 bg-ink text-paper font-mono text-sm hover:bg-accent transition-all rounded-lg hover:scale-[1.03] active:scale-[0.97] inline-block">View My Work</a>
+            <button onClick={onOpenModal} className="px-5 py-3 border border-accent text-accent font-mono text-sm hover:bg-accent/10 transition-all rounded-lg cursor-pointer hover:scale-[1.03] active:scale-[0.97]">
               Client Login / Discuss Budget
             </button>
           </div>
         </div>
         
-        <div className="relative mx-auto">
-          <PhoneMock />
+        <div className="animate-fadeIn-d2 relative mx-auto">
+          <div className="animate-float">
+            <PhoneMock />
+          </div>
         </div>
       </div>
     </section>

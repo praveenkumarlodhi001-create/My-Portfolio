@@ -18,7 +18,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 sm:py-32 border-t border-line">
+    <section id="services" className="reveal-section py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="flex items-end justify-between gap-6 mb-14 flex-wrap">
           <div>
@@ -29,9 +29,9 @@ export default function Services() {
           </div>
           <span className="font-mono text-xs text-ink-faint">capabilities.config</span>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 reveal-stagger">
           {services.map((item, idx) => (
-            <div key={idx} className="bg-paper-dim p-8 border border-line rounded-xl flex flex-col justify-between hover:border-accent transition-colors">
+            <div key={idx} className="card-hover bg-paper-dim p-8 border border-line rounded-xl flex flex-col justify-between hover:border-accent">
               <div>
                 <span className="inline-block font-mono text-[10px] text-accent px-2.5 py-1 bg-accent/10 rounded mb-4">
                   {item.tag}

@@ -15,11 +15,11 @@ export default function CostEstimator({ onOpenModal }) {
 
   const handleLockEstimate = () => {
     const message = `Hello Praveen, I calculated an estimate on your portfolio for a ${projectType.toUpperCase()} project (Urgency: ${urgency}, AI Included: ${hasAI ? 'Yes' : 'No'}). Estimated: ${calculateEstimate()}. Let's discuss!`;
-    window.open(`https://wa.me/919999999999?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/917830469154?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
-    <section id="estimator" className="py-24 sm:py-32 border-t border-line bg-paper-dim/40">
+    <section id="estimator" className="reveal-section py-24 sm:py-32 border-t border-line bg-paper-dim/40">
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="max-w-2xl mb-14">
           <span className="font-mono text-xs text-accent uppercase tracking-wider">Interactive Tool</span>
@@ -45,8 +45,8 @@ export default function CostEstimator({ onOpenModal }) {
                   <button
                     key={item.id}
                     onClick={() => setProjectType(item.id)}
-                    className={`py-3 px-2 rounded-xl border text-xs font-mono transition-all ${
-                      projectType === item.id ? 'bg-accent text-white border-accent shadow-md' : 'bg-paper-dim text-ink border-line hover:border-accent/40'
+                    className={`py-3 px-2 rounded-xl border text-xs font-mono transition-all duration-300 ${
+                      projectType === item.id ? 'bg-accent text-white border-accent shadow-md scale-[1.03]' : 'bg-paper-dim text-ink border-line hover:border-accent/40 hover:scale-[1.02]'
                     }`}
                   >
                     {item.label}
@@ -66,8 +66,8 @@ export default function CostEstimator({ onOpenModal }) {
                   <button
                     key={item.id}
                     onClick={() => setUrgency(item.id)}
-                    className={`py-3 px-3 rounded-xl border text-xs font-mono transition-all ${
-                      urgency === item.id ? 'bg-accent text-white border-accent shadow-md' : 'bg-paper-dim text-ink border-line hover:border-accent/40'
+                    className={`py-3 px-3 rounded-xl border text-xs font-mono transition-all duration-300 ${
+                      urgency === item.id ? 'bg-accent text-white border-accent shadow-md scale-[1.03]' : 'bg-paper-dim text-ink border-line hover:border-accent/40 hover:scale-[1.02]'
                     }`}
                   >
                     {item.label}
@@ -81,7 +81,7 @@ export default function CostEstimator({ onOpenModal }) {
               <label className="block font-mono text-xs text-ink-soft mb-2">3. Advanced Features</label>
               <button
                 onClick={() => setHasAI(!hasAI)}
-                className={`w-full py-3 px-4 rounded-xl border text-xs font-mono flex items-center justify-between transition-all ${
+                className={`w-full py-3 px-4 rounded-xl border text-xs font-mono flex items-center justify-between transition-all duration-300 ${
                   hasAI ? 'bg-accent/10 border-accent text-accent' : 'bg-paper-dim text-ink-soft border-line'
                 }`}
               >
@@ -96,7 +96,7 @@ export default function CostEstimator({ onOpenModal }) {
             <div>
               <span className="font-mono text-xs text-ink-faint uppercase tracking-wider">Estimated Investment</span>
               <div className="text-4xl sm:text-5xl font-display font-bold text-ink mt-2 mb-4">
-                {calculateEstimate()}
+                <span key={calculateEstimate()} className="price-pop">{calculateEstimate()}</span>
               </div>
               <p className="text-xs text-ink-soft leading-relaxed mb-6">
                 * This is an automated algorithmic estimate based on current market rates. Final scope verification takes place during your free strategy call.
@@ -106,13 +106,13 @@ export default function CostEstimator({ onOpenModal }) {
             <div className="space-y-3">
               <button
                 onClick={handleLockEstimate}
-                className="w-full py-4 bg-accent text-white font-mono text-xs rounded-xl hover:bg-accent/90 transition-all shadow-lg shadow-accent/25 flex items-center justify-center gap-2"
+                className="w-full py-4 bg-accent text-white font-mono text-xs rounded-xl hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-accent/25 flex items-center justify-center gap-2"
               >
                 <span>Lock This Estimate via WhatsApp &rarr;</span>
               </button>
               <button
                 onClick={onOpenModal}
-                className="w-full py-3 bg-paper border border-line text-ink font-mono text-xs rounded-xl hover:border-accent transition-all"
+                className="w-full py-3 bg-paper border border-line text-ink font-mono text-xs rounded-xl hover:border-accent hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 Book 15-Min Strategy Call
               </button>

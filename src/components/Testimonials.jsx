@@ -1,55 +1,46 @@
-const reviews = [
+const proofPoints = [
   {
-    name: 'Aarav Mehta',
-    role: 'Founder, FitPulse Gyms',
-    comment: 'Praveen built our multi-branch management website with exceptional speed. The performance and mobile layout are spotless!',
-    platform: 'Google Verified Client',
+    label: 'Live on Google Play',
+    title: 'Roastify (TaporiGPT)',
+    detail: 'Independently built, signed, and published to the Play Store — currently in Open Testing.',
   },
   {
-    name: 'Rohan Verma',
-    role: 'AI Startup Enthusiast',
-    comment: 'His expertise with React Native and Gemini API integration is top-tier. Roastify app runs seamlessly on the Play Store.',
-    platform: 'Play Store Review',
+    label: 'NPTEL Elite — IIT Kharagpur',
+    title: 'Programming in Java',
+    detail: 'Scored 70% overall, 24.94/25 on assignments (Jan–Apr 2025).',
   },
   {
-    name: 'Neha Sharma',
-    role: 'Real Estate Director',
-    comment: 'Extremely professional workflow. Delivered our property showcase template well ahead of the promised deadline.',
-    platform: 'Direct Agency Client',
+    label: 'NPTEL Elite — IIT Madras',
+    title: 'Introduction to Machine Learning',
+    detail: 'Scored 61% overall, 25/25 on assignments (Jul–Oct 2025).',
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="py-24 sm:py-32 border-t border-line">
+    <section className="reveal-section py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="max-w-2xl mb-14">
-          <span className="font-mono text-xs text-accent uppercase tracking-wider">Social Proof</span>
+          <span className="font-mono text-xs text-accent uppercase tracking-wider">Track Record</span>
           <h2 className="font-display font-semibold text-3xl sm:text-4xl text-ink tracking-tight mt-1">
-            Trusted by Founders & Innovators
+            Verified Work, Not Just Promises
           </h2>
           <p className="text-ink-soft text-sm mt-3 leading-relaxed">
-            Here is what clients and users have to say about the applications and web systems deployed by Praveen Technologies.
+            I'm early in taking on client projects — here's what's real and checkable today. Client testimonials will be added here as projects are delivered.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((rev, idx) => (
-            <div key={idx} className="bg-paper-dim border border-line p-7 rounded-2xl flex flex-col justify-between hover:border-accent/40 transition-colors">
+        <div className="grid md:grid-cols-3 gap-6 reveal-stagger">
+          {proofPoints.map((p, idx) => (
+            <div key={idx} className="bg-paper-dim border border-line p-7 rounded-2xl flex flex-col justify-between hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono text-[10px] bg-accent/10 text-accent px-2.5 py-1 rounded-full">
-                    {rev.platform}
-                  </span>
-                  <div className="text-accent text-xs">★★★★★</div>
-                </div>
-                <p className="text-ink-soft text-xs sm:text-sm leading-relaxed mb-6 italic">
-                  &ldquo;{rev.comment}&rdquo;
+                <span className="inline-block font-mono text-[10px] bg-accent/10 text-accent px-2.5 py-1 rounded-full mb-4">
+                  {p.label}
+                </span>
+                <h4 className="font-display font-semibold text-ink text-base mb-2">{p.title}</h4>
+                <p className="text-ink-soft text-xs sm:text-sm leading-relaxed">
+                  {p.detail}
                 </p>
-              </div>
-              <div className="border-t border-line pt-4">
-                <h4 className="font-display font-semibold text-ink text-sm">{rev.name}</h4>
-                <span className="font-mono text-[11px] text-ink-faint">{rev.role}</span>
               </div>
             </div>
           ))}

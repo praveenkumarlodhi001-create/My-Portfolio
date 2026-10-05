@@ -11,6 +11,16 @@ const niches = [
     demoUrl: 'https://praveenkumarlodhi001-create.github.io/super-journey/',
   },
   {
+    id: 'oil-mill',
+    name: '🌾 Oil Mill & Trading',
+    tier: 'Medium / Standard',
+    price: '₹12,999',
+    tagline: 'Bilingual (EN/हिं) product showcase with smart item search, 3D animated cards, and an advance-payment QR section.',
+    status: 'Live on Vercel',
+    demoUrl: 'https://apna-oil-mill.vercel.app/',
+    preview: '/oilmill-preview.png',
+  },
+  {
     id: 'restaurant',
     name: '🍔 Cafe & Restaurant',
     tier: 'Medium / Standard',
@@ -52,7 +62,7 @@ export default function NicheDemos() {
   const [selectedNiche, setSelectedNiche] = useState(niches[0]);
 
   return (
-    <section id="demos" className="py-24 sm:py-32 border-t border-line">
+    <section id="demos" className="reveal-section py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="max-w-2xl mb-14">
           <span className="font-mono text-xs text-accent uppercase tracking-wider">Fast-Track Demos</span>
@@ -70,10 +80,10 @@ export default function NicheDemos() {
               <button
                 key={niche.id}
                 onClick={() => setSelectedNiche(niche)}
-                className={`text-left px-5 py-4 rounded-xl border transition-all flex items-center justify-between font-display text-base ${
+                className={`text-left px-5 py-4 rounded-xl border transition-all duration-300 flex items-center justify-between font-display text-base ${
                   selectedNiche.id === niche.id
-                    ? 'bg-ink text-paper border-ink shadow-md'
-                    : 'bg-paper-dim text-ink border-line hover:border-ink-soft'
+                    ? 'bg-ink text-paper border-ink shadow-md scale-[1.02]'
+                    : 'bg-paper-dim text-ink border-line hover:border-ink-soft hover:scale-[1.01]'
                 }`}
               >
                 <div>
@@ -92,7 +102,7 @@ export default function NicheDemos() {
           </div>
 
           <div className="bg-paper-dim p-8 border border-line rounded-2xl flex flex-col justify-between h-full min-h-[340px]">
-            <div>
+            <div key={selectedNiche.id} className="animate-fadeIn">
               <div className="flex items-center justify-between mb-6">
                 <span className="font-mono text-xs px-3 py-1 bg-signal/10 text-signal rounded-full">
                   {selectedNiche.status}
@@ -105,6 +115,14 @@ export default function NicheDemos() {
               <div className="font-mono text-sm text-accent font-semibold mb-4">
                 Package Price: {selectedNiche.price}
               </div>
+              {selectedNiche.preview && (
+                <img
+                  src={selectedNiche.preview}
+                  alt={`${selectedNiche.name} live preview`}
+                  loading="lazy"
+                  className="w-full h-auto rounded-xl border border-line mb-5 shadow-md"
+                />
+              )}
               <p className="text-ink-soft text-sm leading-relaxed mb-6">
                 {selectedNiche.tagline}
               </p>
@@ -116,10 +134,11 @@ export default function NicheDemos() {
             </div>
 
             <a
+              key={selectedNiche.id + '-cta'}
               href={selectedNiche.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-full py-3.5 font-mono text-sm transition-colors rounded-xl text-center block shadow-lg ${
+              className={`animate-fadeIn w-full py-3.5 font-mono text-sm transition-colors rounded-xl text-center block shadow-lg ${
                 selectedNiche.demoUrl !== '#' 
                   ? 'bg-accent text-white hover:bg-accent/90 shadow-accent/20' 
                   : 'bg-paper border border-line text-ink hover:bg-paper-dim'

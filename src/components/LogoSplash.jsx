@@ -13,7 +13,7 @@ export default function LogoSplash({ onFinished }) {
 
   return (
     <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-paper transition-opacity duration-500 ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center text-white shadow-2xl shadow-accent/30 animate-pulse">
+      <div className="logo-orbit w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center text-white shadow-2xl shadow-accent/30">
         <span className="font-display font-bold text-2xl tracking-tighter">PK</span>
       </div>
       <span className="mt-4 font-mono text-xs text-ink-soft uppercase tracking-widest">

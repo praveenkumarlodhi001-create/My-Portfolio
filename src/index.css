@@ -36,3 +36,230 @@
 .animate-fadeIn {
   animation: fadeIn 0.4s ease forwards;
 }
+
+/* Scroll-reveal: sections fade + rise into view once as the user scrolls.
+   JS (useScrollReveal) toggles .is-visible when a .reveal-section enters the viewport. */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger direct children (cards/list items) inside a revealed section */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-section.is-visible .reveal-stagger > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 400ms; }
+
+.animate-fadeIn-d1 { animation: fadeIn 0.6s ease forwards; animation-delay: 0.1s; opacity: 0; }
+.animate-fadeIn-d2 { animation: fadeIn 0.6s ease forwards; animation-delay: 0.22s; opacity: 0; }
+.animate-fadeIn-d3 { animation: fadeIn 0.6s ease forwards; animation-delay: 0.34s; opacity: 0; }
+.animate-fadeIn-d4 { animation: fadeIn 0.6s ease forwards; animation-delay: 0.46s; opacity: 0; }
+
+/* Gentle idle float for the hero phone mockup — subtle, not distracting */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+/* Respect users who've asked for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-section,
+  .reveal-stagger > *,
+  .animate-fadeIn-d1,
+  .animate-fadeIn-d2,
+  .animate-fadeIn-d3,
+  .animate-fadeIn-d4,
+  .animate-float,
+  .logo-orbit::before,
+  .bg-blob,
+  .shine-btn::after,
+  .gradient-text,
+  .pulse-ring,
+  .modal-pop,
+  .check-pop,
+  .price-pop {
+    animation: none !important;
+    transition: none !important;
+  }
+  .pulse-ring {
+    display: none !important;
+  }
+  .reveal-section, .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== Animated logo ===== */
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+}
+.logo-orbit {
+  position: relative;
+  isolation: isolate;
+}
+.logo-orbit::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #3B82F6, #10B981, #3B82F6, #60A5FA, #3B82F6);
+  animation: orbitSpin 4s linear infinite;
+  z-index: -1;
+}
+.logo-orbit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  animation: logoPulse 2.6s ease-in-out infinite;
+}
+
+/* ===== Floating gradient blobs (background ambience) ===== */
+@keyframes blobDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.08); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+@keyframes blobDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-35px, 30px) scale(1.1); }
+}
+.bg-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-blob-1 { animation: blobDrift1 14s ease-in-out infinite; }
+.bg-blob-2 { animation: blobDrift2 18s ease-in-out infinite; }
+
+/* ===== Shine sweep on primary buttons ===== */
+@keyframes shineSweep {
+  0% { transform: translateX(-120%) skewX(-15deg); }
+  100% { transform: translateX(220%) skewX(-15deg); }
+}
+.shine-btn {
+  position: relative;
+  overflow: hidden;
+}
+.shine-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-120%) skewX(-15deg);
+}
+.shine-btn:hover::after {
+  animation: shineSweep 0.9s ease;
+}
+
+/* ===== Animated gradient text ===== */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.gradient-text {
+  background: linear-gradient(90deg, #3B82F6, #60A5FA, #10B981, #3B82F6);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* ===== Attention pulse ring (WhatsApp float button) ===== */
+@keyframes pulseRing {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  70% { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: #25D366;
+  animation: pulseRing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: 0;
+}
+
+/* ===== Modal pop-in ===== */
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.92) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-pop {
+  animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== Success checkmark pop ===== */
+@keyframes checkPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.check-pop {
+  animation: checkPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Price value pop (Cost Estimator) ===== */
+@keyframes pricePop {
+  0% { transform: scale(0.85); opacity: 0.4; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.price-pop {
+  display: inline-block;
+  animation: pricePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Focus glow ring on form inputs ===== */
+.input-glow {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.input-glow:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* ===== Card hover lift ===== */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.35);
+}

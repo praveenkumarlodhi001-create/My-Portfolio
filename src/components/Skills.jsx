@@ -23,15 +23,15 @@ const stack = [
 
 export default function Skills() {
   return (
-    <section id="stack" className="py-24 sm:py-32 border-t border-line">
+    <section id="stack" className="reveal-section py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="flex items-end justify-between gap-6 mb-14 flex-wrap">
           <h2 className="font-display font-semibold text-3xl sm:text-4xl text-ink tracking-tight">What I build with</h2>
           <span className="font-mono text-xs text-ink-faint">stack.config</span>
         </div>
-        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-12">
+        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-12 reveal-stagger">
           {stack.map((group) => (
-            <div key={group.category} className="border-l-2 border-accent pl-6">
+            <div key={group.category} className="card-hover border-l-2 border-accent pl-6">
               <h3 className="font-display font-semibold text-lg text-ink mb-1">{group.category}</h3>
               <p className="font-mono text-xs text-ink-faint mb-4">{group.note}</p>
               <ul className="space-y-2">

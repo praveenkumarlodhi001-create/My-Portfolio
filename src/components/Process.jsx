@@ -23,7 +23,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 sm:py-32 border-t border-line">
+    <section id="process" className="reveal-section py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="max-w-2xl mb-16">
           <span className="font-mono text-xs text-accent uppercase tracking-wider">Workflow</span>
@@ -35,9 +35,9 @@ export default function Process() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal-stagger">
           {steps.map((s, idx) => (
-            <div key={idx} className="bg-paper-dim p-8 border border-line rounded-2xl flex flex-col justify-between hover:border-accent/40 transition-colors">
+            <div key={idx} className="card-hover bg-paper-dim p-8 border border-line rounded-2xl flex flex-col justify-between hover:border-accent/40">
               <div>
                 <span className="font-mono text-xs text-accent bg-accent/10 px-2.5 py-1 rounded inline-block mb-6">
                   Step {s.num}
