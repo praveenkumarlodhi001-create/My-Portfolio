@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[GYM BRAND NAME] — Fitness Membership Landing Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #050505;
+    --bg-soft: #0A0A0C;
+    --card: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --text: #FFFFFF;
+    --text-dim: rgba(255,255,255,0.62);
+    --text-faint: rgba(255,255,255,0.4);
+    --lime: #CCFF00;
+    --pink: #FF0055;
+    --cyan: #00F0FF;
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
+    --radius-pill: 999px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  a{ color:inherit; text-decoration:none; }
+  ::selection{ background:var(--lime); color:#050505; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--lime); outline-offset:3px; }
+
+  .wrap{ max-width:1220px; margin:0 auto; padding:0 32px; position:relative; z-index:2; }
+
+  /* ---------- Ambient aurora background ---------- */
+  .aurora{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .aurora span{
+    position:absolute; border-radius:50%; filter:blur(110px); opacity:0.35;
+  }
+  .aurora .a1{ width:640px; height:640px; top:-220px; left:-160px; background:var(--pink); animation:float1 22s ease-in-out infinite; }
+  .aurora .a2{ width:560px; height:560px; top:120px; right:-200px; background:var(--cyan); opacity:0.25; animation:float2 26s ease-in-out infinite; }
+  .aurora .a3{ width:520px; height:520px; bottom:-260px; left:30%; background:var(--lime); opacity:0.2; animation:float3 30s ease-in-out infinite; }
+  @keyframes float1{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(60px,80px); } }
+  @keyframes float2{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-70px,60px); } }
+  @keyframes float3{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(40px,-60px); } }
+
+  .grain{
+    position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.03; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Glass utility ---------- */
+  .glass{
+    background:var(--card);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--border);
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    padding:18px 0;
+  }
+  .topbar-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 22px;
+    border-radius:var(--radius-pill);
+    background:rgba(10,10,12,0.6);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+  }
+  .logo{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; letter-spacing:0.02em; }
+  .logo-mark{
+    width:30px; height:30px; border-radius:9px;
+    background:linear-gradient(135deg, var(--lime), var(--cyan));
+    flex-shrink:0;
+  }
+  .logo .bracket{ color:var(--text-dim); font-weight:600; font-size:13px; }
+  .nav{ display:flex; gap:30px; font-size:14px; font-weight:500; color:var(--text-dim); }
+  .nav a{ transition:color 0.15s; }
+  .nav a:hover{ color:var(--text); }
+  .btn-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px;
+    border-radius:var(--radius-pill);
+    font-weight:700; font-size:13px; letter-spacing:0.01em;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .btn-lime{
+    background:var(--lime); color:#0A0A0A;
+    box-shadow:0 0 0 rgba(204,255,0,0);
+  }
+  .btn-lime:hover{ transform:translateY(-2px); box-shadow:0 8px 30px rgba(204,255,0,0.35); }
+  .btn-outline{
+    border:1px solid var(--border-strong); color:var(--text);
+    background:rgba(255,255,255,0.02);
+  }
+  .btn-outline:hover{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.3); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:64px 0 40px; position:relative; }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 16px 8px 12px;
+    border-radius:var(--radius-pill);
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.03em;
+    color:var(--text-dim); margin-bottom:28px;
+  }
+  .pulse-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--lime);
+    box-shadow:0 0 0 0 rgba(204,255,0,0.6);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(204,255,0,0.55); }
+    70%{ box-shadow:0 0 0 10px rgba(204,255,0,0); }
+    100%{ box-shadow:0 0 0 0 rgba(204,255,0,0); }
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:50px; align-items:center; }
+  .hero h1{
+    font-size:clamp(42px,5.4vw,72px); font-weight:900; letter-spacing:-0.03em; line-height:1.02;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(90deg, var(--lime), var(--cyan));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-sub{ margin-top:22px; max-width:460px; color:var(--text-dim); font-size:16px; }
+  .hero-actions{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn-lg{ padding:16px 30px; font-size:14px; }
+  .hero-meta{ display:flex; gap:28px; margin-top:44px; flex-wrap:wrap; }
+  .hero-meta .m{ }
+  .hero-meta .num{ font-size:26px; font-weight:800; }
+  .hero-meta .lbl{ font-size:12px; color:var(--text-faint); margin-top:2px; }
+
+  /* Hero visual card */
+  .showcase{
+    border-radius:var(--radius-lg);
+    padding:2px;
+    background:linear-gradient(140deg, rgba(204,255,0,0.5), rgba(0,240,255,0.25), rgba(255,0,85,0.35));
+    position:relative;
+  }
+  .showcase-inner{
+    border-radius:calc(var(--radius-lg) - 2px);
+    background:rgba(8,8,10,0.92);
+    aspect-ratio:4/5;
+    position:relative;
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+  }
+  .showcase-inner svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .showcase-tag{
+    position:relative; z-index:2; margin:22px;
+    padding:14px 18px;
+    border-radius:var(--radius-md);
+    width:calc(100% - 44px);
+  }
+  .showcase-tag .l1{ font-size:12px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; }
+  .showcase-tag .l2{ font-size:17px; font-weight:700; margin-top:2px; }
+  .live-chip{
+    position:absolute; top:22px; right:22px; z-index:2;
+    display:flex; align-items:center; gap:6px;
+    padding:7px 12px; border-radius:var(--radius-pill);
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:100px 0; position:relative; }
+  .eyebrow{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--cyan); font-weight:700; margin-bottom:14px;
+  }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:48px; flex-wrap:wrap; }
+  .section-head h2{ font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.02em; }
+  .section-head p{ max-width:360px; color:var(--text-dim); font-size:14px; }
+
+  /* ---------- Class matrix ---------- */
+  .format-grid{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:16px;
+  }
+  .format-chip{
+    border-radius:var(--radius-md);
+    padding:26px 20px;
+    position:relative; overflow:hidden;
+    cursor:pointer;
+    transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .format-chip:hover{ transform:translateY(-6px); background:var(--card-hover); border-color:var(--border-strong); }
+  .format-icon{ width:40px; height:40px; margin-bottom:20px; }
+  .format-chip h4{ font-size:16px; font-weight:700; margin-bottom:6px; }
+  .format-chip .desc{ font-size:12.5px; color:var(--text-faint); margin-bottom:16px; }
+  .slot-badges{ display:flex; gap:6px; flex-wrap:wrap; }
+  .slot-badge{
+    font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 9px;
+    border-radius:var(--radius-pill); border:1px solid var(--border-strong);
+    color:var(--text-dim);
+  }
+  .format-glow{
+    position:absolute; width:120px; height:120px; border-radius:50%;
+    filter:blur(50px); opacity:0.35; top:-40px; right:-40px; z-index:0;
+  }
+
+  /* ---------- Info cards ---------- */
+  .info-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .info-card{ border-radius:var(--radius-md); padding:30px; }
+  .info-card .icon-circle{
+    width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.06); margin-bottom:20px;
+  }
+  .info-card h3{ font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); margin-bottom:8px; font-weight:700; }
+  .info-card .value{ font-size:17px; font-weight:600; }
+  .info-card .value.small{ font-size:13.5px; font-weight:400; color:var(--text-dim); margin-top:4px; }
+
+  /* ---------- Coaches ---------- */
+  .trainers{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .trainer-card{ border-radius:var(--radius-md); overflow:hidden; transition:transform 0.2s ease, border-color 0.2s ease; }
+  .trainer-card:hover{ transform:translateY(-6px); border-color:var(--border-strong); }
+  .trainer-photo{ aspect-ratio:3/4; position:relative; overflow:hidden; }
+  .trainer-photo svg{ width:100%; height:100%; }
+  .trainer-info{ padding:18px 20px 22px; }
+  .trainer-info .name{ font-weight:700; font-size:15px; }
+  .trainer-info .role{ font-family:'JetBrains Mono',monospace; font-size:11px; margin-top:4px; }
+
+  /* ---------- Facilities ---------- */
+  .facility-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .facility-card{ border-radius:var(--radius-md); padding:28px 22px; transition:transform 0.2s ease, border-color 0.2s ease; }
+  .facility-card:hover{ transform:translateY(-4px); border-color:var(--border-strong); }
+  .facility-card .icon{ width:34px; height:34px; margin-bottom:18px; }
+  .facility-card h4{ font-size:15px; font-weight:700; margin-bottom:6px; }
+  .facility-card p{ font-size:12.5px; color:var(--text-faint); }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; }
+  .price-card{
+    border-radius:var(--radius-lg);
+    padding:34px 28px;
+    display:flex; flex-direction:column;
+    position:relative;
+    transition:transform 0.2s ease;
+  }
+  .price-card:hover{ transform:translateY(-6px); }
+  .price-card.featured{
+    background:linear-gradient(160deg, rgba(204,255,0,0.1), rgba(255,255,255,0.03));
+    border:1px solid rgba(204,255,0,0.35);
+  }
+  .tier-tag{
+    position:absolute; top:-14px; left:28px;
+    background:var(--lime); color:#0A0A0A;
+    font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase;
+    padding:6px 14px; border-radius:var(--radius-pill);
+  }
+  .tier-name{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dim); font-weight:700; margin-bottom:14px; }
+  .tier-price{ font-size:42px; font-weight:900; letter-spacing:-0.02em; }
+  .tier-price .per{ font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:400; color:var(--text-faint); }
+  .tier-desc{ font-size:13.5px; color:var(--text-dim); margin:12px 0 24px; }
+  .tier-features{ list-style:none; margin-bottom:28px; flex:1; }
+  .tier-features li{
+    display:flex; align-items:center; gap:10px;
+    font-size:13.5px; padding:10px 0; border-top:1px solid var(--border);
+  }
+  .check{ width:18px; height:18px; flex-shrink:0; }
+  .price-cta{
+    width:100%; padding:15px; border-radius:var(--radius-pill);
+    font-weight:800; font-size:13.5px; text-align:center;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .price-cta:hover{ transform:translateY(-2px); }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .testimonial{ border-radius:var(--radius-md); padding:26px; }
+  .stars{ display:flex; gap:3px; margin-bottom:16px; }
+  .testimonial .quote{ font-size:14.5px; line-height:1.65; color:var(--text-dim); margin-bottom:22px; }
+  .who{ display:flex; align-items:center; gap:12px; }
+  .avatar{ width:36px; height:36px; border-radius:50%; flex-shrink:0; }
+  .who .name{ font-weight:700; font-size:13px; }
+  .who .meta{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-faint); }
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    border-radius:var(--radius-lg);
+    padding:70px 56px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    background:radial-gradient(circle at 50% 0%, rgba(204,255,0,0.12), transparent 60%), rgba(255,255,255,0.03);
+    border:1px solid var(--border);
+  }
+  .cta-band h2{ font-size:clamp(30px,4.4vw,48px); font-weight:900; letter-spacing:-0.02em; max-width:640px; margin:0 auto 30px; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:60px 0 40px; border-top:1px solid var(--border); margin-top:20px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:40px; margin-bottom:48px; }
+  .footer-brand .logo{ margin-bottom:16px; }
+  .footer-brand p{ font-size:13px; color:var(--text-faint); max-width:260px; }
+  .footer-col h5{ font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); margin-bottom:16px; font-weight:700; }
+  .footer-col a{ display:block; font-size:14px; margin-bottom:10px; color:var(--text-dim); transition:color 0.15s; }
+  .footer-col a:hover{ color:var(--text); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    padding-top:24px; border-top:1px solid var(--border);
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-faint);
+  }
+  .placeholder-note{
+    background:var(--lime); color:#0A0A0A;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+    padding:4px 10px; border-radius:var(--radius-pill);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .nav{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .format-grid{ grid-template-columns:repeat(3,1fr); }
+    .info-cards{ grid-template-columns:1fr; }
+    .trainers{ grid-template-columns:repeat(2,1fr); }
+    .facility-grid{ grid-template-columns:repeat(2,1fr); }
+    .pricing-grid{ grid-template-columns:1fr; }
+    .testimonials{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:560px){
+    .wrap{ padding:0 18px; }
+    .format-grid{ grid-template-columns:repeat(2,1fr); }
+    .cta-band{ padding:46px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grain"></div>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="logo"><span class="logo-mark"></span><span class="bracket">[LOGO]</span></div>
+    <nav class="nav">
+      <a href="#programs">Programs</a>
+      <a href="#coaches">Trainers</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#membership">Membership</a>
+    </nav>
+    <a href="#membership" class="btn-pill btn-lime">Book free trial</a>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="badge glass">
+      <span class="pulse-dot"></span>
+      ● OPEN TODAY · [CITY / LOCATION]
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>Fitness that<br>actually shows<br><span class="grad">up for you.</span></h1>
+        <p class="hero-sub">Group classes, strength coaching, and a community built around consistency — not a rack of unused machines. 2 free trial sessions, zero commitment.</p>
+        <div class="hero-actions">
+          <a href="#membership" class="btn-pill btn-lime btn-lg">Claim 2 free classes →</a>
+          <a href="#schedule" class="btn-pill btn-outline btn-lg">View class schedule</a>
+        </div>
+        <div class="hero-meta">
+          <div class="m"><div class="num">[XXX]+</div><div class="lbl">Active members</div></div>
+          <div class="m"><div class="num">[XX]</div><div class="lbl">Weekly classes</div></div>
+          <div class="m"><div class="num">[X.X]</div><div class="lbl">Member rating</div></div>
+        </div>
+      </div>
+
+      <div class="showcase">
+        <div class="showcase-inner">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="g1" cx="50%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#CCFF00" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="g2" cx="80%" cy="80%" r="50%">
+                <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="#08080A"/>
+            <rect width="400" height="500" fill="url(#g1)"/>
+            <rect width="400" height="500" fill="url(#g2)"/>
+            <g fill="none" stroke="#CCFF00" stroke-width="2" opacity="0.85">
+              <circle cx="200" cy="230" r="90">
+                <animate attributeName="r" values="90;98;90" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.85;0.4;0.85" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="200" cy="230" r="60" stroke="#00F0FF" opacity="0.6">
+                <animate attributeName="r" values="60;68;60" dur="3s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+            <g stroke="#FFFFFF" stroke-width="1.4" opacity="0.5">
+              <path d="M120 230 Q200 150 280 230 Q200 310 120 230 Z" fill="none">
+                <animateTransform attributeName="transform" type="rotate" from="0 200 230" to="360 200 230" dur="18s" repeatCount="indefinite"/>
+              </path>
+            </g>
+            <circle cx="200" cy="230" r="6" fill="#CCFF00"/>
+          </svg>
+          <div class="live-chip glass"><span class="pulse-dot"></span>LIVE · S&amp;C SESSION</div>
+          <div class="showcase-tag glass">
+            <div class="l1">TODAY, 6:00 PM</div>
+            <div class="l2">Strength &amp; Conditioning</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= CLASS MATRIX ================= -->
+<section id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Class formats</span>
+        <h2>Train your way,<br>every single day</h2>
+      </div>
+      <p>Five formats running across morning and evening slots. Tap a format on the live site to see today's timings.</p>
+    </div>
+    <div class="format-grid">
+
+      <div class="format-chip glass">
+        <div class="format-glow" style="background:#CCFF00;"></div>
+        <svg class="format-icon" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="1.8"><path d="M6 6v12M18 6v12M2 10h4M18 10h4M2 14h4M18 14h4M6 12h12"/></svg>
+        <h4>S&amp;C</h4>
+        <div class="desc">Strength &amp; conditioning, barbell-based.</div>
+        <div class="slot-badges"><span class="slot-badge">AM</span><span class="slot-badge">PM</span></div>
+      </div>
+
+      <div class="format-chip glass">
+        <div class="format-glow" style="background:#FF0055;"></div>
+        <svg class="format-icon" viewBox="0 0 24 24" fill="none" stroke="#FF0055" stroke-width="1.8"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l-4 8M12 13l4 8M8 11l-3 2M16 11l3 2"/></svg>
+        <h4>Dance Fitness</h4>
+        <div class="desc">High-energy cardio set to music.</div>
+        <div class="slot-badges"><span class="slot-badge">AM</span></div>
+      </div>
+
+      <div class="format-chip glass">
+        <div class="format-glow" style="background:#00F0FF;"></div>
+        <svg class="format-icon" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+        <h4>Yoga</h4>
+        <div class="desc">Breath-led mobility &amp; recovery flow.</div>
+        <div class="slot-badges"><span class="slot-badge">AM</span><span class="slot-badge">PM</span></div>
+      </div>
+
+      <div class="format-chip glass">
+        <div class="format-glow" style="background:#CCFF00;"></div>
+        <svg class="format-icon" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="1.8"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+        <h4>HIIT</h4>
+        <div class="desc">Interval-based full-body burn.</div>
+        <div class="slot-badges"><span class="slot-badge">PM</span></div>
+      </div>
+
+      <div class="format-chip glass">
+        <div class="format-glow" style="background:#FF0055;"></div>
+        <svg class="format-icon" viewBox="0 0 24 24" fill="none" stroke="#FF0055" stroke-width="1.8"><circle cx="8" cy="8" r="5"/><circle cx="16" cy="16" r="5"/><path d="M11.5 11.5l1-1"/></svg>
+        <h4>Boxing</h4>
+        <div class="desc">Bag work, footwork, and pad rounds.</div>
+        <div class="slot-badges"><span class="slot-badge">AM</span><span class="slot-badge">PM</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= INFO CARDS ================= -->
+<section id="schedule" style="padding-top:0;">
+  <div class="wrap">
+    <div class="info-cards">
+      <div class="info-card glass">
+        <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
+        <h3>Location</h3>
+        <div class="value">[Street address], [Neighborhood]</div>
+        <div class="value small">[City], [State] — [PIN code]</div>
+      </div>
+      <div class="info-card glass">
+        <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Hours</h3>
+        <div class="value">06:00 AM – 10:00 PM</div>
+        <div class="value small">Open every day, incl. holidays</div>
+      </div>
+      <div class="info-card glass">
+        <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF0055" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.3a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2z"/></svg></div>
+        <h3>Front desk</h3>
+        <div class="value">+91 XXXXX XXXXX</div>
+        <div class="value small">hello@[gymbrandname].com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COACHES ================= -->
+<section id="coaches">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Meet the team</span>
+        <h2>Coaches on the<br>floor, always</h2>
+      </div>
+      <p>Every member gets a program review with a coach in week one.</p>
+    </div>
+    <div class="trainers">
+      <div class="trainer-card glass">
+        <div class="trainer-photo">
+          <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="400" fill="#0E0E10"/>
+            <circle cx="150" cy="150" r="0" fill="#CCFF00" opacity="0.5">
+              <animate attributeName="r" values="0;70;60" dur="1.2s" fill="freeze"/>
+            </circle>
+            <rect x="60" y="230" width="180" height="170" rx="40" fill="#CCFF00" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="trainer-info"><div class="name">[Coach name]</div><div class="role" style="color:#CCFF00;">Strength &amp; conditioning</div></div>
+      </div>
+      <div class="trainer-card glass">
+        <div class="trainer-photo">
+          <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="400" fill="#0E0E10"/>
+            <circle cx="150" cy="150" r="0" fill="#00F0FF" opacity="0.5">
+              <animate attributeName="r" values="0;70;60" dur="1.2s" fill="freeze"/>
+            </circle>
+            <rect x="60" y="230" width="180" height="170" rx="40" fill="#00F0FF" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="trainer-info"><div class="name">[Coach name]</div><div class="role" style="color:#00F0FF;">Yoga &amp; mobility</div></div>
+      </div>
+      <div class="trainer-card glass">
+        <div class="trainer-photo">
+          <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="400" fill="#0E0E10"/>
+            <circle cx="150" cy="150" r="0" fill="#FF0055" opacity="0.5">
+              <animate attributeName="r" values="0;70;60" dur="1.2s" fill="freeze"/>
+            </circle>
+            <rect x="60" y="230" width="180" height="170" rx="40" fill="#FF0055" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="trainer-info"><div class="name">[Coach name]</div><div class="role" style="color:#FF0055;">Boxing coach</div></div>
+      </div>
+      <div class="trainer-card glass">
+        <div class="trainer-photo">
+          <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="400" fill="#0E0E10"/>
+            <circle cx="150" cy="150" r="0" fill="#CCFF00" opacity="0.5">
+              <animate attributeName="r" values="0;70;60" dur="1.2s" fill="freeze"/>
+            </circle>
+            <rect x="60" y="230" width="180" height="170" rx="40" fill="#CCFF00" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="trainer-info"><div class="name">[Coach name]</div><div class="role" style="color:#CCFF00;">Head coach / founder</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FACILITIES ================= -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Facility</span>
+        <h2>What's on site</h2>
+      </div>
+    </div>
+    <div class="facility-grid">
+      <div class="facility-card glass">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="1.6"><path d="M4 4v16M20 4v16M4 12h16"/></svg>
+        <h4>Free-weight floor</h4>
+        <p>Full rack, plate, and platform setup — no waiting.</p>
+      </div>
+      <div class="facility-card glass">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+        <h4>Locker rooms</h4>
+        <p>Showers, towels, and secure lockers included.</p>
+      </div>
+      <div class="facility-card glass">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#FF0055" stroke-width="1.6"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+        <h4>Sanitised daily</h4>
+        <p>Stations wiped between sessions, deep clean nightly.</p>
+      </div>
+      <div class="facility-card glass">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="1.6"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+        <h4>Progress tracking</h4>
+        <p>Monthly InBody scan included in every plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="membership">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Membership</span>
+        <h2>Simple plans,<br>no lock-in</h2>
+      </div>
+      <p>Pause or cancel anytime. Prices shown are placeholders — insert client's real pricing.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="price-card glass">
+        <div class="tier-name">Drop-in</div>
+        <div class="tier-price">₹[XXX]<span class="per">/session</span></div>
+        <div class="tier-desc">Try the floor, zero commitment.</div>
+        <ul class="tier-features">
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Single day access</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>1 group class included</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Locker &amp; shower access</li>
+        </ul>
+        <a href="#" class="price-cta btn-outline">Book a session</a>
+      </div>
+
+      <div class="price-card featured glass">
+        <span class="tier-tag">Most popular</span>
+        <div class="tier-name">Monthly</div>
+        <div class="tier-price">₹[X,XXX]<span class="per">/month</span></div>
+        <div class="tier-desc">Unlimited floor access, all formats.</div>
+        <ul class="tier-features">
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Unlimited floor access</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>All 5 class formats</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Monthly InBody scan</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>1 free trainer check-in</li>
+        </ul>
+        <a href="#" class="price-cta btn-lime">Start free trial</a>
+      </div>
+
+      <div class="price-card glass">
+        <div class="tier-name">Annual</div>
+        <div class="tier-price">₹[XX,XXX]<span class="per">/year</span></div>
+        <div class="tier-desc">Best value for long-term training.</div>
+        <ul class="tier-features">
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Everything in Monthly</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>2 months free vs. monthly</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Quarterly program review</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>4 guest passes / year</li>
+        </ul>
+        <a href="#" class="price-cta btn-outline">Start free trial</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Member notes</span>
+        <h2>Placeholder reviews</h2>
+      </div>
+      <p>Swap these for the client's real member quotes before delivery.</p>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial glass">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Coached programming, not just a room full of machines. First gym where I actually kept showing up."</p>
+        <div class="who">
+          <svg class="avatar" viewBox="0 0 40 40"><rect width="40" height="40" rx="20" fill="#CCFF00" opacity="0.25"/></svg>
+          <div><div class="name">[Member name]</div><div class="meta">Member since [Month, Year]</div></div>
+        </div>
+      </div>
+      <div class="testimonial glass">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"The 6AM class runs on time, every time. That reliability is the whole reason I'm still consistent."</p>
+        <div class="who">
+          <svg class="avatar" viewBox="0 0 40 40"><rect width="40" height="40" rx="20" fill="#00F0FF" opacity="0.25"/></svg>
+          <div><div class="name">[Member name]</div><div class="meta">Member since [Month, Year]</div></div>
+        </div>
+      </div>
+      <div class="testimonial glass">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Free weight floor is never overcrowded, and coaches actually correct your form instead of just watching."</p>
+        <div class="who">
+          <svg class="avatar" viewBox="0 0 40 40"><rect width="40" height="40" rx="20" fill="#FF0055" opacity="0.25"/></svg>
+          <div><div class="name">[Member name]</div><div class="meta">Member since [Month, Year]</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<section>
+  <div class="wrap">
+    <div class="cta-band glass">
+      <h2>Two free classes.<br>No card required.</h2>
+      <a href="#membership" class="btn-pill btn-lime btn-lg">Claim your trial →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark"></span><span class="bracket">[LOGO]</span></div>
+        <p>A demo white-label fitness landing page. All bracketed content is placeholder — replace with client details before delivery.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Train</h5>
+        <a href="#programs">Class formats</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#coaches">Coaches</a>
+      </div>
+      <div class="footer-col">
+        <h5>Membership</h5>
+        <a href="#membership">Pricing</a>
+        <a href="#membership">Free trial</a>
+        <a href="#schedule">Visit us</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="#">+91 XXXXX XXXXX</a>
+        <a href="#">hello@[gymbrandname].com</a>
+        <a href="#">[Street], [City]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© [YEAR] [GYM BRAND NAME]. Demo template — unbranded.</span>
+      <span class="placeholder-note">Replace all [ ] placeholders before client delivery</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
