@@ -4,17 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#0B0F19',      // Deep dark background
-        'paper-dim': '#111827', // Card background
-        ink: '#F9FAFB',        // Bright white text
-        'ink-soft': '#9CA3AF',  // Muted gray text
-        'ink-faint': '#6B7280', // Subtle border/faint text
+        paper: '#080808',      // Deep dark background
+        'paper-dim': '#151515', // Card background
+        ink: '#F5F5F1',        // Bright white text
+        'ink-soft': '#B3B3B3',  // Muted gray text
+        'ink-faint': '#777777', // Subtle border/faint text
         signal: '#10B981',      // Vibrant green status dot
-        accent: '#3B82F6',      // Electric blue accent
-        line: '#1F2937',        // Divider line color
+        accent: '#E50914',      // Streaming red accent
+        line: '#303030',        // Divider line color
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'sans-serif'],
+        display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },

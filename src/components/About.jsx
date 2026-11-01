@@ -32,13 +32,16 @@ export default function About({ onOpenResumeGate }) {
   return (
     <section id="about" className="reveal-section py-16 sm:py-20 border-t border-line">
       <div className="max-w-content mx-auto px-6 sm:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-6">
+        <div className="about-feature-grid">
+          <div className="about-photo-wrap">
+            <img src="/images/praveen-about.jpg" alt="Praveen Kumar in a professional setting" className="about-photo" loading="lazy" />
+            <div className="about-photo-label"><span>01 / THE BUILDER</span><strong>Curious by nature.<br />Builder by choice.</strong></div>
+          </div>
+          <div className="about-copy">
           <div className="max-w-2xl">
             <span className="font-mono text-xs text-accent uppercase tracking-wider">About</span>
             <p className="mt-2 text-ink text-lg sm:text-xl leading-relaxed">
-              4th-year B.Tech (CSE) student at AKTU and mobile-first software developer who builds solo and
-              ships working software — from an AI persona app live on the Play Store to voice-first tools
-              built for real, non-technical users.
+              I’m a final-year B.Tech Computer Science student, software developer and the person behind Noderra Tech. I build and ship digital products — from AI-powered mobile apps to practical tools and business websites — with a focus on solving real problems through thoughtful engineering.
             </p>
           </div>
 
@@ -68,6 +71,7 @@ export default function About({ onOpenResumeGate }) {
                 </a>
               ))}
             </div>
+          </div>
           </div>
         </div>
       </div>

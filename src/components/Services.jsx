@@ -24,7 +24,7 @@ export default function Services() {
           <div>
             <span className="font-mono text-xs text-accent uppercase tracking-wider">What I Offer</span>
             <h2 className="font-display font-semibold text-3xl sm:text-4xl text-ink tracking-tight mt-1">
-              Client Services & Solutions
+              Noderra Tech — Digital Solutions
             </h2>
           </div>
           <span className="font-mono text-xs text-ink-faint">capabilities.config</span>
@@ -44,7 +44,7 @@ export default function Services() {
                 </p>
               </div>
               <div className="mt-8 pt-4 border-t border-line font-mono text-xs text-ink-faint">
-                Production-ready & Scalable
+                Noderra Tech · Built for growth
               </div>
             </div>
           ))}

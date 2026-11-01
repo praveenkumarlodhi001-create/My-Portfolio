@@ -1,18 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#projects', label: 'Work' },
-  { href: '#stack', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
-  { href: '#services', label: 'Services' },
-  { href: '#pricing', label: 'Pricing' },
-];
+import { profiles, navLinks } from '../data/story';
 
-export default function Navbar({ onOpenModal }) {
+export default function Navbar({ onOpenModal, onSwitchProfile, profile = 'main' }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const me = profiles.find((p) => p.id === profile) || profiles[0];
+  const profileMeta = [me.badge ? 'PK' : me.glyph, me.name, `profile-${{ main: 'red', recruiter: 'blue', developer: 'green', client: 'gold' }[me.id]}`];
+  const visibleLinks = useMemo(() => (navLinks[profile] || navLinks.main).map(([href, label]) => ({ href, label })), [profile]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -33,7 +29,7 @@ export default function Navbar({ onOpenModal }) {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    links.forEach((link) => {
+    visibleLinks.forEach((link) => {
       const section = document.querySelector(link.href);
       if (section) observer.observe(section);
     });
@@ -42,10 +38,10 @@ export default function Navbar({ onOpenModal }) {
       window.removeEventListener('scroll', onScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [visibleLinks]);
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-40 transition-colors duration-300 ${scrolled ? 'bg-paper/90 backdrop-blur border-b border-line' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 inset-x-0 z-40 transition-colors duration-300 ${scrolled ? 'bg-[#080808]/90 backdrop-blur-xl border-b border-white/10' : 'bg-transparent'}`}>
       <nav className="max-w-content mx-auto flex items-center justify-between px-6 sm:px-8 h-16">
         
         {/* Professional Tech Brand Logo */}
@@ -55,17 +51,26 @@ export default function Navbar({ onOpenModal }) {
           </div>
           <div className="flex flex-col">
             <span className="font-display font-bold text-base tracking-tight text-ink leading-none">
-              Praveen<span className="text-accent">.</span>
+              PRAVEEN<span className="text-accent">.</span>
             </span>
-            <span className="font-mono text-[9px] text-ink-faint uppercase tracking-widest mt-0.5">
-              Technologies
-            </span>
+            <span className="font-mono text-[9px] text-ink-faint uppercase tracking-widest mt-0.5">DEVELOPER & FOUNDER</span>
           </div>
         </a>
 
+        <button
+          type="button"
+          onClick={onSwitchProfile}
+          className={`nav-profile ${profileMeta[2]}`}
+          title={`Viewing as ${profileMeta[1]} — click to switch`}
+          aria-label={`Viewing as ${profileMeta[1]}. Switch profile`}
+        >
+          <span>{profileMeta[0]}</span>
+          <small>{profileMeta[1]}</small>
+        </button>
+
         {/* Desktop Links with Active Highlight */}
         <ul className="hidden md:flex items-center gap-6 font-mono text-sm">
-          {links.map((link) => {
+          {visibleLinks.map((link) => {
             const isActive = activeSection === link.href;
             return (
               <li key={link.href}>
@@ -111,7 +116,7 @@ export default function Navbar({ onOpenModal }) {
       {/* Mobile Menu */}
       {open && (
         <ul className="md:hidden flex flex-col gap-2 px-6 py-4 font-mono text-sm bg-paper border-b border-line shadow-xl">
-          {links.map((link) => {
+          {visibleLinks.map((link) => {
             const isActive = activeSection === link.href;
             return (
               <li key={link.href}>

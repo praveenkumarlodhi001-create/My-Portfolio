@@ -1,20 +1,18 @@
 import { useEffect } from 'react';
 
 /**
- * Watches every element with the `.reveal-section` class and adds
- * `.is-visible` the first time it scrolls into view. Pure CSS handles the
- * actual animation (see index.css) — this hook only toggles the class,
- * so it stays cheap even with many sections on the page.
+ * Adds `.is-visible` to every `.reveal-section` the first time it scrolls into view.
+ * Pass any value that changes when new sections mount (e.g. the active profile) as
+ * `watchKey` so late-mounted sections get observed too — otherwise they stay invisible.
  */
-export default function useScrollReveal() {
+export default function useScrollReveal(watchKey) {
   useEffect(() => {
-    const targets = document.querySelectorAll('.reveal-section');
-    if (!targets.length) return;
+    const targets = document.querySelectorAll('.reveal-section:not(.is-visible)');
+    if (!targets.length) return undefined;
 
-    // If the browser can't do IntersectionObserver, just show everything.
     if (!('IntersectionObserver' in window)) {
       targets.forEach((el) => el.classList.add('is-visible'));
-      return;
+      return undefined;
     }
 
     const observer = new IntersectionObserver(
@@ -31,5 +29,5 @@ export default function useScrollReveal() {
 
     targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [watchKey]);
 }

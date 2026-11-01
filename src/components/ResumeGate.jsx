@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 // To change it: node scripts/hash-passcode.mjs "your-new-passcode"
 // then paste the printed hash here.
 const PASSCODE_HASH =
-  '1f857fc815c03207fbbcf982f8f1ce9aeade68a08b9620d01f7ae9e3b04094b2';
+  '4e62cdf927c4a6ce5255392effcd2618df936de11e87213d5d08bc0212525742';
 
-const RESUME_FILE = '/resume-dae7fee5a3.pdf';
+const RESUME_FILE = '/resume-2bbc40ed13.pdf';
 const RESUME_DOWNLOAD_NAME = 'Praveen_Kumar_Resume.pdf';
 const SESSION_KEY = 'resume_unlocked';
 const MAX_ATTEMPTS = 5;
@@ -115,7 +115,7 @@ export default function ResumeGate({ isOpen, onClose }) {
         ) : (
           <>
             <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" className="w-5 h-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E50914" strokeWidth="2" className="w-5 h-5">
                 <rect x="4" y="10" width="16" height="10" rx="2" />
                 <path d="M8 10V7a4 4 0 0 1 8 0v3" strokeLinecap="round" />
               </svg>

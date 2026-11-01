@@ -39,9 +39,7 @@ export default function Contact() {
           
           {/* Professional Developer Workspace / Avatar Header */}
           <div className="flex items-center gap-5 p-5 bg-paper-dim border border-line rounded-2xl">
-            <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center font-display font-semibold text-xl border-2 border-accent shadow-md shrink-0">
-              PK
-            </div>
+            <img src="/images/praveen-avatar.jpg" alt="Praveen Kumar" className="w-16 h-16 rounded-full object-cover object-top border-2 border-accent shadow-md shrink-0" loading="lazy" />
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-display font-bold text-lg text-ink">Praveen Kumar</h3>
@@ -53,6 +51,7 @@ export default function Contact() {
           </div>
 
           <div>
+            <span className="section-kicker"><span className="status-dot" /> NOW ACCEPTING INQUIRIES · INTERNSHIPS &amp; FREELANCE BUILDS</span>
             <h2 className="font-display font-semibold text-3xl sm:text-4xl text-ink tracking-tight">
               Have something worth building? Let's talk it through.
             </h2>
