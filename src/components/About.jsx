@@ -34,7 +34,7 @@ export default function About({ onOpenResumeGate }) {
       <div className="max-w-content mx-auto px-6 sm:px-8">
         <div className="about-feature-grid">
           <div className="about-photo-wrap">
-            <img src="/images/praveen-about.jpg" alt="Praveen Kumar in a professional setting" className="about-photo" loading="lazy" />
+            <img src="/images/praveen-hero2.jpg" alt="Praveen Kumar in a professional setting" className="about-photo" loading="lazy" />
             <div className="about-photo-label"><span>01 / THE BUILDER</span><strong>Curious by nature.<br />Builder by choice.</strong></div>
           </div>
           <div className="about-copy">

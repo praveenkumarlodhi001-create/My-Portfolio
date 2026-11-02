@@ -1,0 +1,3 @@
+{
+  "functions": { "api/resume.js": { "includeFiles": "private/**" } }
+}

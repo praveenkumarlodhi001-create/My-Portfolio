@@ -9,17 +9,17 @@ export const profiles = [
 
 // What plays first for each profile (hero + explore row are always on top).
 export const layouts = {
-  main: ['about', 'journey', 'projects', 'future', 'skills', 'moments', 'certificates', 'screenplay', 'contact'],
-  recruiter: ['screenplay', 'moments', 'certificates', 'skills', 'projects', 'journey', 'about', 'future', 'contact'],
-  developer: ['projects', 'skills', 'journey', 'future', 'moments', 'certificates', 'screenplay', 'about', 'contact'],
-  client: ['client', 'projects', 'moments', 'certificates', 'about', 'contact'],
+  main: ['about', 'journey', 'projects', 'demos', 'future', 'skills', 'moments', 'certificates', 'screenplay', 'contact'],
+  recruiter: ['screenplay', 'moments', 'certificates', 'skills', 'projects', 'demos', 'journey', 'about', 'future', 'contact'],
+  developer: ['projects', 'demos', 'skills', 'journey', 'future', 'moments', 'certificates', 'screenplay', 'about', 'contact'],
+  client: ['client', 'projects', 'demos', 'moments', 'certificates', 'about', 'contact'],
 };
 
 export const navLinks = {
   main: [['#about', 'Story'], ['#journey', 'Journey'], ['#projects', 'Originals'], ['#moments', 'Moments'], ['#stack', 'Skills'], ['#screenplay', 'Resume']],
-  recruiter: [['#screenplay', 'Resume'], ['#moments', 'Moments'], ['#stack', 'Skills'], ['#projects', 'Originals'], ['#journey', 'Journey']],
-  developer: [['#projects', 'Originals'], ['#stack', 'Skills'], ['#journey', 'Journey'], ['#future', 'Future'], ['#moments', 'Moments']],
-  client: [['#services', 'Services'], ['#pricing', 'Pricing'], ['#projects', 'Originals'], ['#faq', 'FAQ'], ['#contact', 'Contact']],
+  recruiter: [['#screenplay', 'Resume'], ['#moments', 'Moments'], ['#stack', 'Skills'], ['#projects', 'Originals'], ['#demos', 'Demos'], ['#journey', 'Journey']],
+  developer: [['#projects', 'Originals'], ['#demos', 'Demos'], ['#stack', 'Skills'], ['#journey', 'Journey'], ['#future', 'Future'], ['#moments', 'Moments']],
+  client: [['#services', 'Services'], ['#pricing', 'Pricing'], ['#projects', 'Originals'], ['#demos', 'Demos'], ['#faq', 'FAQ'], ['#contact', 'Contact']],
 };
 
 export const heroCta = {
@@ -35,16 +35,17 @@ export const episodes = [
   { id: 'moments', ep: '02', title: 'MY ACHIEVEMENTS', sub: '5 moments · 7 certifications', href: '#moments', needs: 'moments', grad: 'linear-gradient(140deg,#6d0710,#e50914)', mark: '★', progress: 55 },
   { id: 'skills', ep: '03', title: 'MY SKILLS', sub: '6 domains', href: '#stack', needs: 'skills', grad: 'linear-gradient(140deg,#073550,#1693c9)', mark: '</>', progress: 80 },
   { id: 'projects', ep: '04', title: 'MY PROJECTS', sub: '3 originals', href: '#projects', needs: 'projects', grad: 'linear-gradient(140deg,#5b3a05,#e0902a)', mark: '▶', progress: 45 },
+  { id: 'demos', ep: '09', title: 'WEBSITE DEMOS', sub: '6 concept sites', href: '#demos', needs: 'demos', grad: 'linear-gradient(140deg,#3a0a2c,#d6336c)', mark: '◧', progress: 25 },
   { id: 'journey', ep: '05', title: 'MY JOURNEY', sub: '5 seasons', href: '#journey', needs: 'journey', grad: 'linear-gradient(140deg,#0d4a37,#19b57f)', mark: 'S5', progress: 35 },
   { id: 'future', ep: '06', title: 'FUTURE THINKING', sub: 'Ideas beyond today', href: '#future', needs: 'future', grad: 'linear-gradient(140deg,#073c3a,#1fb5a8)', mark: '?', progress: 20 },
   { id: 'resume', ep: '07', title: 'THE RESUME', sub: 'Education & experience', href: '#screenplay', needs: 'screenplay', grad: 'linear-gradient(140deg,#2c2c2c,#6a6a6a)', mark: 'CV', progress: 90 },
   { id: 'services', ep: '08', title: 'NODERRA TECH', sub: 'Hire me to build', href: '#services', needs: 'client', grad: 'linear-gradient(140deg,#0e2a52,#2f7bff)', mark: 'N', progress: 30 },
 ];
 export const episodeOrder = {
-  main: ['story', 'moments', 'skills', 'projects', 'journey', 'future', 'resume', 'services'],
-  recruiter: ['resume', 'moments', 'skills', 'projects', 'story', 'journey', 'future', 'services'],
-  developer: ['projects', 'skills', 'journey', 'future', 'moments', 'resume', 'story', 'services'],
-  client: ['services', 'projects', 'moments', 'story'],
+  main: ['story', 'moments', 'skills', 'projects', 'demos', 'journey', 'future', 'resume', 'services'],
+  recruiter: ['resume', 'moments', 'skills', 'projects', 'demos', 'story', 'journey', 'future', 'services'],
+  developer: ['projects', 'demos', 'skills', 'journey', 'future', 'moments', 'resume', 'story', 'services'],
+  client: ['services', 'projects', 'demos', 'moments', 'story'],
 };
 
 export const moments = [

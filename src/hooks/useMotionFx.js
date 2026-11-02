@@ -14,14 +14,19 @@ export default function useMotionFx() {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return undefined;
 
-    const root = document.documentElement;
     let raf = 0;
     const onScroll = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
         const y = window.scrollY;
-        root.style.setProperty('--hero-py', `${Math.min(y, window.innerHeight * 1.2) * 0.22}px`);
+        const hero = document.getElementById('top');
+        if (!hero) return;
+        if (y > window.innerHeight * 1.3) {
+          if (hero.style.getPropertyValue('--hero-py')) hero.style.removeProperty('--hero-py');
+          return;
+        }
+        hero.style.setProperty('--hero-py', `${y * 0.22}px`);
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -61,7 +66,7 @@ export default function useMotionFx() {
       document.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerleave', onLeave);
       cancelAnimationFrame(raf);
-      root.style.removeProperty('--hero-py');
+      document.getElementById('top')?.style.removeProperty('--hero-py');
     };
   }, []);
 }

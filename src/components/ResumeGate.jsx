@@ -1,30 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 
-// SHA-256 of the passcode — never store the plain passcode in the source.
-// To change it: node scripts/hash-passcode.mjs "your-new-passcode"
-// then paste the printed hash here.
-const PASSCODE_HASH =
-  '4e62cdf927c4a6ce5255392effcd2618df936de11e87213d5d08bc0212525742';
-
-const RESUME_FILE = '/resume-2bbc40ed13.pdf';
+// The passcode is checked on the server (api/resume.js). The PDF is not in /public,
+// so it cannot be fetched without the right passcode.
+// Change the passcode: node scripts/hash-passcode.mjs "new-passcode"
+// then set the printed hash as RESUME_PASSCODE_HASH in Vercel (or edit DEFAULT_HASH in api/resume.js).
 const RESUME_DOWNLOAD_NAME = 'Praveen_Kumar_Resume.pdf';
-const SESSION_KEY = 'resume_unlocked';
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MS = 30_000;
 
-async function sha256Hex(text) {
-  const data = new TextEncoder().encode(text);
-  const digest = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
-}
-
 export default function ResumeGate({ isOpen, onClose }) {
   const [passcode, setPasscode] = useState('');
-  const [unlocked, setUnlocked] = useState(
-    () => sessionStorage.getItem(SESSION_KEY) === '1'
-  );
+  const [fileUrl, setFileUrl] = useState('');
+  const unlocked = Boolean(fileUrl);
   const [error, setError] = useState('');
   const [attempts, setAttempts] = useState(0);
   const [locked, setLocked] = useState(false);
@@ -44,13 +31,32 @@ export default function ResumeGate({ isOpen, onClose }) {
     if (locked || checking || !passcode) return;
 
     setChecking(true);
-    const hash = await sha256Hex(passcode.trim());
+    let status = 0;
+    try {
+      const res = await fetch('/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passcode: passcode.trim() }),
+      });
+      status = res.status;
+      if (res.ok && (res.headers.get('content-type') || '').includes('pdf')) {
+        const blob = await res.blob();
+        setFileUrl(URL.createObjectURL(blob));
+        setError('');
+        setChecking(false);
+        return;
+      }
+    } catch {
+      status = -1;
+    }
     setChecking(false);
 
-    if (hash === PASSCODE_HASH) {
-      sessionStorage.setItem(SESSION_KEY, '1');
-      setUnlocked(true);
-      setError('');
+    if (status === 404 || status === -1 || status >= 500) {
+      setError('Resume service is unavailable right now. Please try again later.');
+      return;
+    }
+    if (status === 429) {
+      setError('Too many attempts. Please wait a minute.');
       return;
     }
 
@@ -73,6 +79,8 @@ export default function ResumeGate({ isOpen, onClose }) {
   };
 
   const handleClose = () => {
+    if (fileUrl) URL.revokeObjectURL(fileUrl);
+    setFileUrl('');
     setPasscode('');
     setError('');
     onClose();
@@ -96,10 +104,10 @@ export default function ResumeGate({ isOpen, onClose }) {
             </div>
             <h3 className="font-display font-semibold text-ink text-lg">Access granted</h3>
             <p className="mt-1.5 text-sm text-ink-soft">
-              This stays unlocked for your current browser session.
+              Your copy is ready to download.
             </p>
             <a
-              href={RESUME_FILE}
+              href={fileUrl}
               download={RESUME_DOWNLOAD_NAME}
               className="mt-6 w-full px-5 py-3 bg-ink text-paper font-mono text-sm rounded-lg hover:bg-accent transition-all hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center gap-2"
             >

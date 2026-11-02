@@ -49,3 +49,26 @@ This is a front-end gate (no server): it keeps casual visitors and search engine
 - Edit content in `src/data/story.js` (profiles, layouts, episodes, moments, seasons, skills, resume text).
 - Projects: `src/data/projects.js`; certificates: `src/data/certificates.js`; Future Thinking: `src/data/futureIdeas.js`.
 - Footer has "Watch again" and "Replay opening".
+
+## Website Demos section
+- Data: `src/data/demos.js`; component: `src/components/DemoSites.jsx`.
+- Screenshot: save `public/demos/<id>.jpg` and set `preview: '/demos/<id>.jpg'` for that entry; until then a labelled placeholder shows.
+
+## Resume lock (server-side)
+- The PDF is `private/resume.pdf` (NOT in `public/`). `api/resume.js` returns it only for the right passcode; `vercel.json` bundles it into the function.
+- Change passcode: `node scripts/hash-passcode.mjs "new"` → set `RESUME_PASSCODE_HASH` in Vercel project env vars → redeploy.
+- To replace the resume: overwrite `private/resume.pdf`.
+
+## Demo previews
+`npm i -D playwright && npx playwright install chromium && npm run capture-previews` captures real 1280x800 screenshots of the six live sites into `public/demos/`.
+
+## Opening sequence + cursor-tracking hero
+- `IntroLoader.jsx`: name + 0→100% counter on first visit per session (click / Esc skips; off for reduced-motion).
+- `useHeroTrack.js` + `Hero.jsx`: portrait tilts toward the cursor, spotlight follows it, role line rotates (edit `ROLES` in Hero.jsx). Touch devices get a slow idle sway.
+- True "head turns to follow the cursor" (as in the reference video) needs several photos of you looking left / centre / right — send them and it can be wired in.
+
+## v9 performance notes
+- Scroll progress bar + hero parallax are ref/transform based (no per-scroll React renders, no root-level CSS var writes).
+- Hero: masked wrapper is static, only the inner photo layer tilts; spotlight is a moved element (no blend mode); no backdrop-blur over animated layers.
+- Cursor ring and hero tracking stop their rAF loops when idle; will-change only where needed.
+- Hero portrait: `public/images/praveen-hero3.jpg` (dark office). About section uses `praveen-hero2.jpg` (light studio). Older photos kept in `public/images/`.

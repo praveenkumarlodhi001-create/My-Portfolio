@@ -1,6 +1,6 @@
 // Run this whenever you want to change the resume passcode:
 //   node scripts/hash-passcode.mjs "your-new-passcode"
-// Then paste the printed hash into PASSCODE_HASH in src/components/ResumeGate.jsx
+// Then set the printed hash as RESUME_PASSCODE_HASH on Vercel (or edit DEFAULT_HASH in api/resume.js)
 
 import { createHash } from 'node:crypto';
 

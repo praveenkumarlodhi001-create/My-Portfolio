@@ -9,6 +9,7 @@ import About from './components/About';
 import StatsBand from './components/StatsBand';
 import Journey from './components/Journey';
 import Projects from './components/Projects';
+import DemoSites from './components/DemoSites';
 import FutureThinking from './components/FutureThinking';
 import Skills from './components/Skills';
 import Moments from './components/Moments';
@@ -24,6 +25,7 @@ import FAQ from './components/FAQ';
 import ClientSuggestions from './components/ClientSuggestions';
 import WhatsAppFloat from './components/WhatsAppFloat';
 import LogoSplash from './components/LogoSplash';
+import IntroLoader from './components/IntroLoader';
 import ClientLoginModal from './components/ClientLoginModal';
 import ResumeGate from './components/ResumeGate';
 import Cursor from './components/Cursor';
@@ -52,6 +54,16 @@ export default function App() {
   const [lastProfile] = useState(readSavedProfile);
   const [profile, setProfile] = useState(() => readSavedProfile() ?? 'main');
   // Returning visitors skip the picker; the profile chip in the nav brings it back.
+  const [showIntro, setShowIntro] = useState(() => {
+    try {
+      if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return false;
+      return sessionStorage.getItem('pk-intro-seen') !== '1';
+    } catch { return true; }
+  });
+  const finishIntro = () => {
+    try { sessionStorage.setItem('pk-intro-seen', '1'); } catch { /* ignore */ }
+    setShowIntro(false);
+  };
   const [showSplash, setShowSplash] = useState(() => readSavedProfile() === null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeGateOpen, setIsResumeGateOpen] = useState(false);
@@ -83,6 +95,7 @@ export default function App() {
     about: <About key="about" onOpenResumeGate={openResume} />,
     journey: <Journey key="journey" />,
     projects: <Projects key="projects" />,
+    demos: <DemoSites key="demos" />,
     future: <FutureThinking key="future" />,
     skills: <Skills key="skills" />,
     moments: <Moments key="moments" />,
@@ -111,7 +124,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-paper text-ink relative netflix-portfolio">
-      {showSplash && <LogoSplash onFinished={handleSplashFinish} lastProfile={lastProfile} />}
+      {showIntro && <IntroLoader onDone={finishIntro} />}
+      {!showIntro && showSplash && <LogoSplash onFinished={handleSplashFinish} lastProfile={lastProfile} />}
 
       <Cursor />
       <ScrollProgress />
